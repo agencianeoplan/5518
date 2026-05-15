@@ -453,6 +453,7 @@ body.menu-open #sideMenu {
   gap: 11px;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   padding: 40px;
   box-sizing: border-box;
@@ -471,7 +472,7 @@ body.menu-open #sideMenu {
   text-transform: uppercase;
 }
 
-.textLinear {
+.textGray:hover {
   /* background: linear-gradient(90deg, #4DD520, #F3F51C); */
   background: linear-gradient(to right, #4DD520 0%, #F3F51C 100%);
   -webkit-background-clip: text;
