@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (currentSection === 'home') {
-      logoImg.src = './img/icons/logoNavHome.png';
+      logoImg.src = './img/icons/logoNavHome.svg';
       iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', 'black'));
     } else if (currentSection === 'bio') {
-      logoImg.src = './img/icons/logoNavBio.png';
+      logoImg.src = './img/icons/logoNavBio.svg';
       iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', 'white'));
     } else if (currentSection === 'jobs') {
-      logoImg.src = './img/icons/logoNavJobs.png';
+      logoImg.src = './img/icons/logoNavJobs.svg';
       iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', '#4B4B4B'));
     }
   };
