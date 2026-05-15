@@ -1,27 +1,92 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const iconMenu = document.getElementById('iconMenu');
+  const iconMenus = document.querySelectorAll('.iconMenu');
   const closeMenu = document.getElementById('closeMenu');
-  const logoImg = document.querySelector('.logoMaster img');
-  const iconMenuSvgPaths = document.querySelectorAll('#iconMenu path');
   const menuLinks = document.querySelectorAll('#menuOptions a');
   const sideMenuLogoLink = document.querySelector('.sideMenuTop a');
 
-  iconMenu.addEventListener('click', () => {
-    document.body.classList.add('menu-open');
+  iconMenus.forEach(icon => {
+    icon.addEventListener('click', () => {
+      document.body.classList.add('menu-open');
+    });
   });
 
   closeMenu.addEventListener('click', () => {
     document.body.classList.remove('menu-open');
   });
 
-  // Fechar o menu e marcar como ativo ao clicar nos links
+  // Fechar o menu e rolar para a seção correta
   menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      menuLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
       document.body.classList.remove('menu-open');
+
+      if (targetId === 'jobs') {
+        const bioSectionObj = document.getElementById('bio');
+        if (bioSectionObj) {
+          const bioHeight = bioSectionObj.offsetHeight;
+          const bioTop = bioSectionObj.offsetTop;
+          const speed = 1.3;
+          const maxScroll = bioHeight / speed;
+          
+          window.scrollTo({
+            top: bioTop + maxScroll,
+            behavior: 'smooth'
+          });
+        }
+      } else if (targetId === 'footer') {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      } else if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: 'smooth'
+        });
+      }
     });
   });
+
+  // Atualizar o item ativo do menu no scroll
+  const updateActiveMenuOnScroll = () => {
+    const scrollY = window.scrollY;
+    const bioSectionObj = document.getElementById('bio');
+    
+    if (!bioSectionObj) return;
+
+    const bioTop = bioSectionObj.offsetTop;
+    const bioHeight = bioSectionObj.offsetHeight;
+    const speed = 1.3;
+    const maxScroll = bioHeight / speed;
+    
+    let currentActive = 'home';
+    
+    if (scrollY >= bioTop - 150 && scrollY < bioTop + (maxScroll / 2)) {
+      currentActive = 'bio';
+    } else if (scrollY >= bioTop + (maxScroll / 2)) {
+      currentActive = 'jobs';
+    }
+    
+    const footerObj = document.getElementById('footer');
+    if (footerObj && scrollY >= footerObj.offsetTop - window.innerHeight + 100) {
+      currentActive = 'footer';
+    }
+
+    menuLinks.forEach(link => {
+      const targetId = link.getAttribute('href').substring(1);
+      if (targetId === currentActive) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateActiveMenuOnScroll);
+  updateActiveMenuOnScroll();
 
   // Fechar ao clicar no logo do menu lateral também
   if (sideMenuLogoLink) {
@@ -31,32 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const sections = document.querySelectorAll('section');
-  
-  const updateNavOnScroll = () => {
-    let currentSection = 'home';
-    
-    sections.forEach(section => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 120) {
-        currentSection = section.id;
-      }
-    });
 
-    if (currentSection === 'home') {
-      logoImg.src = './img/icons/logoNavHome.svg';
-      iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', 'black'));
-    } else if (currentSection === 'bio') {
-      logoImg.src = './img/icons/logoNavBio.svg';
-      iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', 'white'));
-    } else if (currentSection === 'jobs') {
-      logoImg.src = './img/icons/logoNavJobs.svg';
-      iconMenuSvgPaths.forEach(path => path.setAttribute('stroke', '#4B4B4B'));
-    }
-  };
-
-  window.addEventListener('scroll', updateNavOnScroll);
-  updateNavOnScroll();
 
   const bioSectionObj = document.getElementById('bio');
   const jobsSectionObj = document.getElementById('jobs');
@@ -72,6 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
     bioTop = bioSectionObj.offsetTop;
     
     jobsSectionObj.style.marginTop = `-${bioHeight}px`;
+
+    const speed = 1.3;
+    const maxScroll = bioHeight / speed;
+    
+    // Add padding to body to compensate for the parallax translateY
+    // This allows the user to scroll fully to the end of the parallax effect
+    if (document.body.style.paddingBottom !== `${maxScroll}px`) {
+      document.body.style.paddingBottom = `${maxScroll}px`;
+    }
 
     const currentScrollTop = window.scrollY;
     
@@ -222,3 +271,4 @@ document.addEventListener('DOMContentLoaded', () => {
     nextPreviewBtn.addEventListener('click', showNextJob);
   }
 });
+    nextPreviewBtn.addEventListener('click', showNextJob);

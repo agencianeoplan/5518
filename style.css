@@ -1,13 +1,13 @@
 .navContainer{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
-  position: fixed; /* trocar para fixed para usar versao anteior*/
+  position: absolute; /* trocar para fixed para usar versao anteior*/
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 40px;
+  padding: 40px;
   box-sizing: border-box;
   z-index: 1000;
   background: transparent;
@@ -54,7 +54,7 @@ body.menu-open #contentWrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px 76px;
+  padding: 76px;
   box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
@@ -176,7 +176,7 @@ body.menu-open #sideMenu {
 
 .bio{
   display: flex;
-  padding: 150px 76px 20px;
+  padding: 200px 76px 20px;
   justify-content: space-around;
   width: 100%;
   min-height: 100vh;
@@ -627,9 +627,12 @@ body.menu-open #sideMenu {
     width: 30px;
     height: 30px;
   }
+  .navContainer {
+    padding: 40px;
+  }
 
-    #sideMenu {
-    padding: 20px 40px;
+  #sideMenu {
+    padding: 40px;
   }
   
   #menuOptions li a {
