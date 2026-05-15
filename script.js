@@ -64,15 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let currentActive = 'home';
     
-    if (scrollY >= bioTop - 150 && scrollY < bioTop + (maxScroll / 2)) {
+    if (scrollY >= bioTop - 150 && scrollY < bioTop + maxScroll - 2) {
       currentActive = 'bio';
-    } else if (scrollY >= bioTop + (maxScroll / 2)) {
+    } else if (scrollY >= bioTop + maxScroll - 2) {
       currentActive = 'jobs';
     }
     
     const footerObj = document.getElementById('footer');
-    if (footerObj && scrollY >= footerObj.offsetTop - window.innerHeight + 100) {
+    // Adicionado + maxScroll porque o footer foi empurrado para baixo pela animação de parallax
+    if (footerObj && scrollY >= (footerObj.offsetTop + maxScroll) - window.innerHeight + 100) {
       currentActive = 'footer';
+    }
+    
+    // Atualizar visual da navegação
+    const navLogo = document.getElementById('navLogo');
+    const navIconPath = document.getElementById('navIconPath');
+    
+    if (navLogo && navIconPath) {
+      if (currentActive === 'home') {
+        navLogo.src = './img/icons/logoNavHome.svg';
+        navIconPath.setAttribute('stroke', 'black');
+      } else if (currentActive === 'bio') {
+        navLogo.src = './img/icons/logoNavBio.svg';
+        navIconPath.setAttribute('stroke', 'white');
+      } else if (currentActive === 'jobs' || currentActive === 'footer') {
+        navLogo.src = './img/icons/logoNavJobs.svg';
+        navIconPath.setAttribute('stroke', '#4B4B4B');
+      }
     }
 
     menuLinks.forEach(link => {

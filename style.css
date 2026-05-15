@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  position: absolute; /* trocar para fixed para usar versao anteior*/
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
