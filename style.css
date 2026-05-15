@@ -132,6 +132,22 @@ body.menu-open #sideMenu {
   align-items: flex-end;
   padding: 40px 76px;
   box-sizing: border-box;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+
+.bio {
+  position: relative;
+  z-index: 3;
+}
+
+.jobs, .jobDetail, .footer {
+  position: relative;
+  z-index: 2;
 }
 
 

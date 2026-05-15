@@ -58,6 +58,56 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateNavOnScroll);
   updateNavOnScroll();
 
+  const bioSectionObj = document.getElementById('bio');
+  const jobsSectionObj = document.getElementById('jobs');
+  const footerSectionObj = document.getElementById('footer');
+  
+  let bioHeight = 0;
+  let bioTop = 0;
+
+  const updateParallax = () => {
+    if (!bioSectionObj || !jobsSectionObj) return;
+    
+    bioHeight = bioSectionObj.offsetHeight;
+    bioTop = bioSectionObj.offsetTop;
+    
+    jobsSectionObj.style.marginTop = `-${bioHeight}px`;
+
+    const currentScrollTop = window.scrollY;
+    
+    if (currentScrollTop < bioTop) {
+      jobsSectionObj.style.visibility = 'hidden';
+      bioSectionObj.style.transform = `translateY(0px)`;
+      jobsSectionObj.style.transform = `translateY(0px)`;
+      if (footerSectionObj) footerSectionObj.style.transform = `translateY(0px)`;
+    } else {
+      jobsSectionObj.style.visibility = 'visible';
+      
+      const speed = 1.3; // 30% mais rápido
+      const maxScroll = bioHeight / speed;
+      const scrolledPastBio = currentScrollTop - bioTop;
+      
+      if (scrolledPastBio <= maxScroll) {
+        const bioOffset = -(speed - 1) * scrolledPastBio;
+        const jobsOffset = scrolledPastBio;
+        
+        bioSectionObj.style.transform = `translateY(${bioOffset}px)`;
+        jobsSectionObj.style.transform = `translateY(${jobsOffset}px)`;
+        if (footerSectionObj) footerSectionObj.style.transform = `translateY(${jobsOffset}px)`;
+      } else {
+        const bioOffset = -(speed - 1) * maxScroll;
+        const jobsOffset = maxScroll;
+        
+        bioSectionObj.style.transform = `translateY(${bioOffset}px)`;
+        jobsSectionObj.style.transform = `translateY(${jobsOffset}px)`;
+        if (footerSectionObj) footerSectionObj.style.transform = `translateY(${jobsOffset}px)`;
+      }
+    }
+  };
+
+  window.addEventListener('scroll', updateParallax);
+  window.addEventListener('resize', updateParallax);
+  updateParallax();
   // Images Spin Logic
   const imagesGroup = document.querySelector('.imagesGroup');
   if (imagesGroup) {
