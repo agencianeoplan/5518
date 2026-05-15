@@ -674,6 +674,10 @@ body.menu-open #sideMenu {
     transform: translateX(-160px) scale(0.5);
   }
 
+  .navContainerJobDetail{
+    padding: 20px;
+  }
+
   .jobDetail {
     padding: 0 20px;
   }
