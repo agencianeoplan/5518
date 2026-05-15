@@ -21,7 +21,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 40px;
+  padding: 40px;
   box-sizing: border-box;
   z-index: 1000;
 }
@@ -130,7 +130,7 @@ body.menu-open #sideMenu {
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-end;
-  padding: 40px 76px;
+  padding: 40px;
   box-sizing: border-box;
 
   position: sticky;
@@ -176,7 +176,7 @@ body.menu-open #sideMenu {
 
 .bio{
   display: flex;
-  padding: 200px 76px 20px;
+  padding: 200px 40px 20px;
   justify-content: space-around;
   width: 100%;
   min-height: 100vh;
@@ -248,7 +248,7 @@ body.menu-open #sideMenu {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  padding: 0px 76px 76px 76px;
+  padding: 0px 40px;
   box-sizing: border-box;
   background-color: #000000;
   align-items: stretch;
@@ -323,7 +323,7 @@ body.menu-open #sideMenu {
 .jobDetail{
   background-color: #FFFFFF;
   display: flex;
-  padding: 50px 76px 0;
+  padding: 50px 40px 0;
   gap: 150px;
   width: 100%;
   box-sizing: border-box;
@@ -454,7 +454,7 @@ body.menu-open #sideMenu {
   display: flex;
   flex-direction: column;
 
-  padding: 76px;
+  padding: 40px;
   box-sizing: border-box;
 }
 
